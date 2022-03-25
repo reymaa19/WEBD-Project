@@ -1,0 +1,192 @@
+/******f************
+    
+    styles
+    Name: Reynald Maala
+    Date: March 24, 2022
+    Description: Styles for CMS Project Site.
+
+*******************/
+
+body {
+	color: black;
+	font-size: 18px;
+    font-family: 'Gothic A1', sans-serif;
+    background-color: white;
+}
+
+#wrapper {
+	padding: 1em 2em 2em 2em;
+	width: 1000px;
+	margin: auto;
+    height: 2400px;
+}
+
+#sort {
+    border: none;
+    font-size: 16px;
+    height: 30px;
+}
+
+#images {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#board {
+    margin-top: 3em;
+    background-color: aliceblue;
+    padding: 1em;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.img {
+    width: 49%;
+    height: 400px;
+    border: 0.1px solid black;
+    border-radius: 5px;
+}
+
+header {
+    display: flex;
+    border-bottom: 2px solid black;
+    margin-bottom: 1em;
+    position:fixed;
+    width: 100%;
+    background-color: white;
+    margin-top: -8px;
+    margin-left: -8px;
+}
+
+    header div {
+        margin: auto 100px auto auto;
+    }
+
+    header div a {
+        color: black;
+        text-decoration: none;
+        text-align: right;
+    }
+
+    header nav {
+        margin: auto auto auto 100px;
+    }
+
+    header nav a {
+        font-size: 24px;
+        font-weight: bold;
+        color: #D0312D;
+        padding: 0.3em 0.7em 0.2em 0.7em;
+        text-decoration: none;
+    }
+
+        header nav a:hover {
+            color: rgba(208, 49, 49, 0.5);
+        }
+
+main {
+	border-radius: 0px 10px 10px 10px;
+	padding: 0px 2% 2% 2%;
+    margin-top: 100px;
+}
+    main div.full_request h2 small a {
+        color: blue;
+        text-decoration: none;
+    }
+
+    main div.full_request h2 small a:hover {
+        color: rgba(0,0,255,0.5);
+    }
+
+	main a {
+		text-decoration: none;
+	}
+
+	main h2 {
+		margin-bottom: 0px;
+	}
+
+	main p {
+		margin: 0px;
+	}
+
+    .request h3 a {
+        color: black;
+        text-decoration: none;
+    }
+
+    .request h3 a:hover {
+        color: rgba(0,0,0,0.5);
+    }
+
+fieldset {
+    min-height: 560px;
+    border: none;
+    padding-top: 20px;
+}
+
+    fieldset label {
+        font-size: 22px;
+    }
+
+    fieldset #title {
+        font-family: 'Gothic A1', sans-serif;
+        font-size: 16px;
+        width: 100%;
+        height: 30px;
+        margin-bottom: 1em;
+    }
+
+    fieldset #service_type {
+        font-family: 'Gothic A1', sans-serif;
+        font-size: 16px;
+        width: 100.5%;
+        height: 30px;
+        border: none;
+        margin-bottom: 1em;
+    }
+
+    fieldset #start_date {
+        font-family: 'Gothic A1', sans-serif;
+        font-size: 16px;
+        width: 100%;
+        height: 30px;
+        margin-bottom: 1em;
+    }
+
+    fieldset #description {
+        font-family: 'Gothic A1', sans-serif;
+        font-size: 16px;
+        width: 100%;
+        min-height: 400px;
+        resize: vertical;
+        margin-bottom: 1em;
+    }
+
+    fieldset input[type=submit] {
+        font-size: 22px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        display: block;
+        margin: 0px auto;
+        border: none;
+        background-color: var(--navy);
+        color: var(--yellow);
+    }
+
+    fieldset input[type=submit]:hover {
+        color: rgba(0,0,0,0.5);
+        cursor:pointer;
+    }
+
+    #options {
+        display: flex;
+    }
+
+@media (max-width: 1340px) {
+    #wrapper {
+        width: 74%;
+    }
+}
+      
