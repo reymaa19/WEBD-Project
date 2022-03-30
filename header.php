@@ -26,12 +26,15 @@
         // If an admin is logged in, create user links.
         if ("<?php echo $_SESSION['admin']; ?>" == true) {
             var userLink = document.createElement('a');
-
             userLink.innerHTML = "Users";
-            userLink.id = "userLink";
             userLink.href = "users.php";
 
+            var serviceLink = document.createElement('a');
+            serviceLink.innerHTML = "Services";
+            serviceLink.href = "services.php";
+
             document.getElementsByTagName("nav")[0].appendChild(userLink);
+            document.getElementsByTagName("nav")[0].appendChild(serviceLink);
         }
     </script>
 

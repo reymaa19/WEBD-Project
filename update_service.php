@@ -8,7 +8,7 @@
 	    exit;
 	}
 
-    $query = "SELECT * FROM users WHERE user_id = :id LIMIT 1";
+    $query = "SELECT * FROM services WHERE service_id = :id LIMIT 1";
     $statement = $db->prepare($query);
 
     $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -23,20 +23,20 @@
     include('header.php');    
 ?>
 <div id="wrapper">
-    <h2>Edit User</h2>
-    <form action="process_user.php" method="post">
+    <h2>Edit Service</h2>
+    <form action="process_service.php" method="post">
     
-        <label for="email">Email: </label>
-        <input name="email" value="<?= $row['email'] ?>">
+        <label for="title">Title: </label>
+        <input name="title" value="<?= $row['title'] ?>">
 
-        <label for="password">Password: </label>
-        <input name="password" type="password" value="<?= $row['password']?>">
+        <label for="description">Description: </label>
+        <input name="description" value="<?= $row['description']?>">
 
-        <label for="first_name">First Name: </label>
-        <input name="first_name" value="<?= $row['first_name']?>">
+        <label for="estimate">Estimate: </label>
+        <input name="estimate" value="<?= $row['estimate']?>">
 
-        <label for="last_name">Last Name: </label>
-        <input name="last_name" value="<?= $row['last_name']?>">
+        <label for="service_type">Service Type: </label>
+        <input name="service_type" value="<?= $row['service_type']?>">
         
         <input type="hidden" name="id" value="<?= $id ?>" />
         <input type="submit" name="command" value="Update">

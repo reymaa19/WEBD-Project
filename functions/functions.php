@@ -2,16 +2,16 @@
     // Creates a request.
 	function create_request($db) {
 		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$service_type = filter_input(INPUT_POST, 'service_type', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$service_id = filter_input(INPUT_POST, 'service_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$start_date = $_POST['start_date'];
 
-		$query = "INSERT INTO requests (title, service_type, description, start_date) 
-					VALUES (:title, :service_type, :description, :start_date)";
+		$query = "INSERT INTO requests (title, service_id, description, start_date) 
+					VALUES (:title, :service_id, :description, :start_date)";
 
 		$statement = $db->prepare($query);
 		$statement->bindValue(':title', $title);
-		$statement->bindValue(':service_type', $service_type);
+		$statement->bindValue(':service_id', $service_id);
 		$statement->bindValue(':description', $description);
 		$statement->bindValue(':start_date', $start_date);
 
@@ -116,6 +116,67 @@
 			exit();
 		}
 	}
+
+
+	// Creates a service.
+	function create_service($db) {
+		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$estimate = filter_input(INPUT_POST, 'estimate', FILTER_VALIDATE_FLOAT);
+		$service_type = filter_input(INPUT_POST, 'service_type', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+		$query = "INSERT INTO services (title, description, estimate, service_type) 
+					VALUES (:title, :description, :estimate, :service_type)";
+
+		$statement = $db->prepare($query);
+		$statement->bindValue(':title', $title);
+		$statement->bindValue(':description', $description);
+		$statement->bindValue(':estimate', $estimate);
+		$statement->bindValue(':service_type', $service_type);
+
+		if ($statement->execute()) 
+		{
+			header('Location: services.php');
+			exit();
+		}
+	}
+
+	// Updates the service.
+	function update_service($db) {
+		$service_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$estimate = filter_input(INPUT_POST, 'estimate', FILTER_VALIDATE_FLOAT);
+		$service_type = filter_input(INPUT_POST, 'service_type', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		
+		$query = "UPDATE services SET title = :title, description = :description, 
+			estimate = :estimate, service_type = :service_type WHERE service_id = :service_id";
+		$statement = $db->prepare($query);
+		$statement->bindValue(':title', $title);
+		$statement->bindValue(':description', $description);
+		$statement->bindValue(':estimate', $estimate);
+		$statement->bindValue(':service_type', $service_type);
+		$statement->bindValue(':service_id', $service_id, PDO::PARAM_INT);
+		
+		$statement->execute();
+		
+		header("Location: services.php");
+		exit;
+	}
+
+	// Deletes the service.
+	function delete_service($db) {
+		$id = $_POST['id'];
+		$query = "DELETE FROM services WHERE service_id='$id'";
+
+		$statement = $db->prepare($query);
+
+		if ($statement->execute()) {
+			header('Location: services.php');
+			exit();
+		}
+	}
+
 
 	// Checks if all inputs for  are filled in and selected.
 	function check_inputs() {

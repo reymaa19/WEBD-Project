@@ -13,7 +13,7 @@
     include('header.php');    
 ?>
 <div id="wrapper">
-    <form action="process_post.php" method="post">
+    <form action="process_request.php" method="post">
         <fieldset>
             <label for="title">Title</label>
             <input type="text" name="title" id="title" placeholder="Mow my Lawn"/>
@@ -30,7 +30,6 @@
 
             <label for="start_date">Enter a date and time for your request:</label>
             <input id="start_date" type="datetime-local" name="start_date">
-
 
             <label for="description">Description</label>
             <textarea name="description" id="description" rows="3"></textarea>
