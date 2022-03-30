@@ -19,6 +19,7 @@
         {
             $_SESSION['id'] = $record['account_id'];
             $_SESSION['email'] = $record['email'];
+            $_SESSION['admin'] = $record['admin'];
 
             header('Location: dashboard.php');
             exit();
@@ -29,9 +30,11 @@
 ?>
     <form method="post">
         <label for="email">Email: </label>
-        <input type="text" name="email" id="email">
+        <input type="text" name="email"
+        >
         <label for="password">Password: </label>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password">
+        
         <input type="submit" value="login">
     </form>
 <?php include('footer.php'); ?>
