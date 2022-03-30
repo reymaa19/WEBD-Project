@@ -29,17 +29,7 @@
     $title = $row['title'];
     $description = $row['description'];
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Edit</title>
-	<link rel="stylesheet" href="styles.css" type="text/css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet"> 
-</head>
-<body>
-	<?php include('header.php'); ?>
+<?php include('header.php'); ?>
 	<div id="wrapper">
 		<main>
 		  <form action="process_request.php" method="post">
@@ -73,5 +63,4 @@
 		  </form>
 		</main>
 	</div>
-</body>
-</html>
+<?php include('footer.php'); ?>

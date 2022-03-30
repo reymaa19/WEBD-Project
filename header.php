@@ -4,14 +4,23 @@
  *		Name: Reynald Maala
  *		Date: March 30, 2022
  *		Description: The header for every page. */ 
-    echo'
-        <header>
-        <div>
-            <h1><a href="index.php">Reynald Lawncare and Snow Removal</a></h1>
-        </div>
-        <nav>
-            <a href="create.php">Create Request</a>
-        </nav>
-        </header>
-    ';
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">    
+    <title>WEBD Project</title>
+    <!-- <link rel="stylesheet" href="styles.css" type="text/css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <header>
+        <nav>
+            <h1><a href="index.php">Reynald Lawncare and Snow Removal</a></h1>
+            <a href="create.php">Create Request</a>
+            <a href="logout.php">Logout</a>
+        </nav>
+    </header>

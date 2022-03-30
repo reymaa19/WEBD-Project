@@ -7,7 +7,7 @@
 
 	require('connect.php');
     require('authenticate.php');
-	require('functions\request_functions.php');
+	require('functions\functions.php');
 
 	if (check_inputs() == "") {
 		if ($_POST['command'] == 'Create') 
@@ -25,17 +25,7 @@
 		delete_request($db);
 	}
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Process Post</title>
-    <link rel="stylesheet" href="styles.css" type="text/css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet"> 
-</head>
-<body>
-	<?php include('header.php'); ?>
+<?php include('header.php'); ?>
 	<div id="wrapper">
 		<main>
 			<h2>An error occured while processing your post.</h2>
@@ -45,5 +35,4 @@
 			<a href="index.php"><strong>Return Home</strong></a>
 		</main>
 	</div>
-</body>
-</html>
+<?php include('footer.php'); ?>

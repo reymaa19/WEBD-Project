@@ -22,22 +22,11 @@
     $title = $row['title'];
     $description = $row['description'];
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Show</title>
-    <link rel="stylesheet" href="styles.css" type="text/css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet"> 
-</head>
-<body>
-	<header>
-	<?php include('header.php'); ?>
+<?php include('header.php'); ?>
 	</header>
 	<div id="wrapper">
 		<main>
-		    <div class="full_request">
+			<div class="full_request">
 				<h2><?= $row['title'] ?> <small><a href="edit.php?id=<?= $id ?>">edit</a></small></h2>
 				<h4>
 					Requested start date: <?= $start_date ?>
@@ -45,8 +34,7 @@
 				<div>
 					<?= $description ?>
 				</div>
-		    </div>
+			</div>
 		</main>
 	</div>
-</body>
-</html>
+<?php include('footer.php'); ?>
