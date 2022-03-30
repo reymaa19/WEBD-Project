@@ -1,6 +1,7 @@
 <?php
-    require('connect.php');
-    require('authenticate.php');
+	include('config.php');
+	include('connect.php');
+	include('functions/functions.php');
 
     $query = "SELECT * FROM requests ORDER BY start_date DESC";
 
@@ -28,8 +29,11 @@
             return true;
         }
     }
+
+	secure();
+
+    include('header.php');
 ?>
-<?php include('header.php'); ?>
     <div id="wrapper">
 		<main>
             <div id="board">

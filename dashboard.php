@@ -1,4 +1,12 @@
-<?php include('header.php'); ?>
+<?php 
+    include('config.php');
+    include('connect.php');
+    include('functions/functions.php');
+
+    secure();
+
+    include('header.php');    
+?>
 <div id="wrapper">
 		<main>
             <h2 id="about">About</h2>

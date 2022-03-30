@@ -17,7 +17,7 @@
 
         if (!empty($record))
         {
-            $_SESSION['account_id'] = $record['account_id'];
+            $_SESSION['id'] = $record['account_id'];
             $_SESSION['email'] = $record['email'];
 
             header('Location: dashboard.php');

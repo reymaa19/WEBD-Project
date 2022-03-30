@@ -5,8 +5,9 @@
  *		Date: March 24, 2022
  *		Description: For showing full request details. */ 
 
-	require('connect.php');
-	require('authenticate.php');
+	include('config.php');
+	include('connect.php');
+	include('functions/functions.php');
 
     $query = "SELECT * FROM requests WHERE request_id = :id LIMIT 1";
     $statement = $db->prepare($query);
@@ -21,8 +22,11 @@
 	$start_date = $row['start_date'];
     $title = $row['title'];
     $description = $row['description'];
+	
+	secure();
+
+    include('header.php');
 ?>
-<?php include('header.php'); ?>
 	</header>
 	<div id="wrapper">
 		<main>

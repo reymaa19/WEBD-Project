@@ -4,11 +4,14 @@
  *		Name: Reynald Maala
  *		Date: March 24, 2022
  *		Description: For creation of service requests. */ 
+    include('config.php');
+    include('connect.php');
+    include('functions/functions.php');
 
-	require('connect.php');
-	require('authenticate.php');
+    secure();
+
+    include('header.php');    
 ?>
-<?php include('header.php'); ?>
 	<div id="wrapper">
 		<main>
             <form action="process_post.php" method="post">

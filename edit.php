@@ -5,8 +5,9 @@
  *		Date: March 24, 2022
  *		Description: For editing requests. */ 
 
-	require('connect.php');
-	require('authenticate.php');
+	include('config.php');
+	include('connect.php');
+	include('functions/functions.php');
 
 	if (!filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT)) 
 	{
@@ -28,8 +29,11 @@
 	$service_type = $row['service_type'];
     $title = $row['title'];
     $description = $row['description'];
+
+    secure();
+
+    include('header.php');
 ?>
-<?php include('header.php'); ?>
 	<div id="wrapper">
 		<main>
 		  <form action="process_request.php" method="post">

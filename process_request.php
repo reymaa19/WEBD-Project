@@ -5,9 +5,9 @@
  *		Date: March 30, 2022
  *		Description: For process validating of request creations. */ 
 
-	require('connect.php');
-    require('authenticate.php');
-	require('functions\functions.php');
+	include('config.php');
+	include('connect.php');
+	include('functions/functions.php');
 
 	if (check_inputs() == "") {
 		if ($_POST['command'] == 'Create') 
@@ -24,8 +24,11 @@
 	{
 		delete_request($db);
 	}
+
+	secure();
+
+    include('header.php');
 ?>
-<?php include('header.php'); ?>
 	<div id="wrapper">
 		<main>
 			<h2>An error occured while processing your post.</h2>

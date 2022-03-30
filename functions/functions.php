@@ -71,4 +71,27 @@
 			$message .= "<br>A date and time must be selected.";
 		return $message;
 	}
+
+	// Checks if a user is logged in and a session id is on.
+	function secure() {
+		if(!isset($_SESSION['id'])) {
+			set_message('You must first log in to access this page.');
+			header('Location: index.php');
+			exit();
+		}
+	}
+
+	// Sets a message to a session variable.
+	function set_message($message) {
+		$_SESSION['message'] = $message;
+	}
+
+	// Gets the session message variable. 
+	function get_message() {
+		if(isset($_SESSION['message'])) {
+			echo '<p>' . $_SESSION['message'] . '</p>' . 
+			'<hr>';
+			unset($_SESSION['message']);
+		}
+	}
 ?>
