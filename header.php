@@ -11,10 +11,6 @@
 <head>
     <meta charset="UTF-8">    
     <title>WEBD Project</title>
-    <!-- <link rel="stylesheet" href="styles.css" type="text/css"> -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet"> 
 </head>
 <body>
     <header>
@@ -25,5 +21,18 @@
             <a href="logout.php">Logout</a>
         </nav>
     </header>
+
+    <script>
+        // If an admin is logged in, create user links.
+        if ("<?php echo $_SESSION['admin']; ?>" == true) {
+            var userLink = document.createElement('a');
+
+            userLink.innerHTML = "Users";
+            userLink.id = "userLink";
+            userLink.href = "users.php";
+
+            document.getElementsByTagName("nav")[0].appendChild(userLink);
+        }
+    </script>
 
     <?php get_message(); ?>
