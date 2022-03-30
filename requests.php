@@ -16,18 +16,13 @@
 
     $result = $statement->fetchAll();
 
-    function truncateContent($description)
-    {
-        if(strlen($description) <= 200)
-        {
+    function truncateContent($description) {
+        if(strlen($description) <= 200) {
             echo $description;
             return false;
         }
-        else
-        {
-            echo substr($description, 0, 192) . ' ...';
-            return true;
-        }
+        echo substr($description, 0, 192) . ' ...';
+        return true;
     }
 
 	secure();

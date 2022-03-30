@@ -2,16 +2,18 @@
     // Creates a request.
 	function create_request($db) {
 		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$service_id = filter_input(INPUT_POST, 'service_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$user_id = filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_NUMBER_INT);
+		$service_id = filter_input(INPUT_POST, 'service_id', FILTER_SANITIZE_NUMBER_INT);
 		$description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$start_date = $_POST['start_date'];
 
-		$query = "INSERT INTO requests (title, service_id, description, start_date) 
-					VALUES (:title, :service_id, :description, :start_date)";
+		$query = "INSERT INTO requests (title, user_id, service_id, description, start_date) 
+					VALUES (:title, :user_id, :service_id, :description, :start_date)";
 
 		$statement = $db->prepare($query);
 		$statement->bindValue(':title', $title);
 		$statement->bindValue(':service_id', $service_id);
+		$statement->bindValue(':user_id', $user_id);
 		$statement->bindValue(':description', $description);
 		$statement->bindValue(':start_date', $start_date);
 
