@@ -16,7 +16,7 @@
     <header>
         <nav>
             <h1><a href="dashboard.php">Reynald Lawncare and Snow Removal</a></h1>
-            <a href="create.php">Create Request</a>
+            <a href="create_request.php">Create Request</a>
             <a href="create_user.php">Register</a>
             <a href="logout.php">Logout</a>
         </nav>

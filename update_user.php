@@ -3,8 +3,7 @@
     include('connect.php');
     include('functions/functions.php');
 
-    if (!filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT)) 
-	{
+    if (!filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT)) {
 	    header("Location: dashboard.php");
 	    exit;
 	}
@@ -41,6 +40,7 @@
         
         <input type="hidden" name="id" value="<?= $id ?>" />
         <input type="submit" name="command" value="Update">
+        <input type="submit" name="command" value="Delete">
     </form>
 </div>
 <?php include('footer.php'); ?>
