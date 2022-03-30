@@ -49,10 +49,10 @@
 	</header>
 	<div id="wrapper">
 		<main>
-		  <form action="process_post.php" method="post">
+		  <form action="process_request.php" method="post">
 		    <fieldset>
 				<label for="title">Title</label>
-				<input type="text" name="title" id="title" placeholder="Mow my Lawn"/>
+				<input type="text" name="title" id="title" placeholder="Mow my Lawn" value="<?= $title ?>"/>
 
 				<p>The original service selected was: <strong><?= $service_type ?></strong></p>
 				<select id="service_type" name="service_type">

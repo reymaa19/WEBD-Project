@@ -41,6 +41,28 @@ body {
     border: 1px solid black;
 }
 
+#board_index {
+    margin-top: 2em;
+    background-color: aliceblue;
+    padding: 0.2em 1em 1em 1em;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+#requests_board a {
+    color: black;
+    text-decoration: none;
+    display:inline-block;
+    width:100%;
+    height:100%;
+}
+
+    #requests_board a:hover {
+        color: rgba(0,0,0,0.5);
+        text-decoration: none;
+    }
+
 .img {
     width: 49%;
     height: 400px;
@@ -54,7 +76,7 @@ header {
     margin-bottom: 1em;
     position:fixed;
     width: 100%;
-    background-color: white;
+    background-color: #F0F8FF;
     margin-top: -8px;
     margin-left: -8px;
 }
@@ -67,6 +89,12 @@ header {
         color: black;
         text-decoration: none;
         text-align: right;
+        text-decoration: none;
+    }
+
+    header div a:hover {
+        color: rgba(0,0,0,0.5);
+        text-decoration: none;
     }
 
     header nav {
@@ -83,6 +111,7 @@ header {
 
         header nav a:hover {
             color: rgba(208, 49, 49, 0.5);
+            text-decoration: none;
         }
 
 main {
@@ -104,7 +133,7 @@ main {
 	}
 
 	main h2 {
-		margin-bottom: 0px;
+		margin-bottom: 10px;
 	}
 
 	main p {
@@ -171,8 +200,7 @@ fieldset {
         display: block;
         margin: 0px auto;
         border: none;
-        background-color: var(--navy);
-        color: var(--yellow);
+        background-color: white;
     }
 
     fieldset input[type=submit]:hover {
@@ -182,6 +210,13 @@ fieldset {
 
     #options {
         display: flex;
+    }
+
+    fieldset button.btn.btn-primary {
+        letter-spacing: 1px;
+        font-weight: bold;
+        display: block;
+        margin: 0px auto;
     }
 
 @media (max-width: 1340px) {

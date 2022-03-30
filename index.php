@@ -1,30 +1,5 @@
 <?php
-    require('connect.php');
 
-    $query = "SELECT * FROM requests ORDER BY start_date DESC LIMIT 10";
-
-    if(isset($_POST['sort'])) {
-        $query = "SELECT * FROM requests ORDER BY " . $_POST['sort'] . " LIMIT 10";
-    }
-    
-    $statement = $db->prepare($query);
-    $statement->execute(); 
-
-    $result = $statement->fetchAll();
-
-    function truncateContent($description)
-    {
-        if(strlen($description) <= 200)
-        {
-            echo $description;
-            return false;
-        }
-        else
-        {
-            echo substr($description, 0, 192) . ' ...';
-            return true;
-        }
-    }
 ?>
 
 <!DOCTYPE html>
@@ -62,30 +37,8 @@
                 <img class="img" src="images/kept_lawn.jpg" alt="kept lawn">
             </div>
 
-            <div id="board">
-                <h2>Requests Board</h2>
-                <!-- Sort -->
-                <form id="sortform" action="" method="post">
-                    <select id="sort" name="sort" onchange="this.form.submit()">
-                        <option hidden disabled selected> Sort </option>
-                        <option value="title ASC">Title</option>
-                        <option value="start_date ASC">Earliest Start Date</option>
-                        <option value="start_date DESC">Latest Start Date</option>
-                        <option value="service_type DESC">Service Type</option>
-                    </select>
-                </form>
-
-                <!-- Requests -->
-                <?php foreach ($result as $row): ?>
-                    <div class="request">
-                        <h3><a href="show.php?id=<?= $row['request_id'] ?>"><?= $row['title'] ?></a></h3>
-                        <?php if (truncateContent($row['description'])): ?>
-	    					<a href="show.php?id=<?= $row['request_id'] ?>">Read Full Request</a>
-	    				<?php endif ?>
-                        <br>
-                        <small>Requested start date: <?= $row['start_date'] ?></small>
-                    </div>
-                <?php endforeach ?>
+            <div id="board_index">
+                <h2 id="requests_board"><a href="requests.php">Requests Board</a></h2>
             </div>
 		</main>
 	</div>

@@ -50,7 +50,7 @@
                     <label for="description">Description</label>
                     <textarea name="description" id="description" rows="3"></textarea>
 
-                    <input type="submit" name="command" value="Create" />
+                    <input type="submit" name="command" value="Create"></input>
                 </fieldset>
             </form>
 		</main>

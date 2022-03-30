@@ -6,6 +6,7 @@
  *		Description: For showing full request details. */ 
 
 	require('connect.php');
+	require('authenticate.php');
 
     $query = "SELECT * FROM requests WHERE request_id = :id LIMIT 1";
     $statement = $db->prepare($query);
