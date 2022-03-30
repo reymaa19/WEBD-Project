@@ -33,12 +33,7 @@
 </head>
 <body>
 	<header>
-		<div>
-			<h1><a href="index.php">Reynald Lawncare and Snow Removal</a></h1>
-		</div>
-		<nav>
-			<a href="create.php">Create Request</a>
-		</nav>
+	<?php include('header.php'); ?>
 	</header>
 	<div id="wrapper">
 		<main>
