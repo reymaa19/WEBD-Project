@@ -3,6 +3,10 @@
     include('connect.php');
     include('functions/functions.php');
 
+    function test() {
+        echo('test');
+    }
+
     secure();
 
     if(!$_SESSION['admin']) {
@@ -10,7 +14,7 @@
         exit();
     }
 
-    $query = 'SELECT * FROM accounts WHERE admin = 0';
+    $query = 'SELECT * FROM users WHERE admin = 0';
     $statement = $db->prepare($query);
     $statement->execute();
 
@@ -32,8 +36,8 @@
             <td><?= $row['first_name'] ?></td>
             <td><?= $row['last_name'] ?></td>
             <td><?= $row['email'] ?></td>
-            <td><button value="edit_users">edit</button></td>
-            <td><button value="delete_users">delete</button></td>
+            <td><a href="update_user.php?id=<?= $row['user_id'] ?>" value="edit">edit</a></td>
+            <td><a href="update_user.php?id=<?= $row['user_id'] ?>" value="delete">delete</a></td>
         </tr>
         <?php endforeach; ?>
 

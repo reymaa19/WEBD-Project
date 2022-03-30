@@ -11,7 +11,7 @@
 
 	if (!filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT)) 
 	{
-	    header("Location: index.php");
+	    header("Location: dashboard.php");
 	    exit;
 	}
 

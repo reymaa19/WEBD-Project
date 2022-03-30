@@ -5,7 +5,7 @@
     
     if(isset($_POST['email'])) {
         $query = 'SELECT * 
-                  FROM accounts
+                  FROM users
                   WHERE email = "'.$_POST['email'].'"
                   AND password = "'.md5($_POST['password']).'"
                   LIMIT 1';
@@ -17,7 +17,7 @@
 
         if (!empty($record))
         {
-            $_SESSION['id'] = $record['account_id'];
+            $_SESSION['id'] = $record['user_id'];
             $_SESSION['email'] = $record['email'];
             $_SESSION['admin'] = $record['admin'];
 
@@ -34,7 +34,7 @@
         >
         <label for="password">Password: </label>
         <input type="password" name="password">
-        
+
         <input type="submit" value="login">
     </form>
 <?php include('footer.php'); ?>
