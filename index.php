@@ -6,15 +6,17 @@
     if(isset($_POST['email'])) {
         $query = 'SELECT * 
                   FROM accounts
-                  WHERE email = '.$_POST["email"].'
-                  AND password = '.md5($_POST["password"]).'
+                  WHERE email = "'.$_POST['email'].'"
+                  AND password = "'.md5($_POST['password']).'"
                   LIMIT 1';
         
         $statement = $db->prepare($query);
+        $statement->execute();
 
-        if ($statement->execute())
+        $record = $statement->fetch();
+
+        if (!empty($record))
         {
-            $record = $statement->fetch();
             $_SESSION['account_id'] = $record['account_id'];
             $_SESSION['email'] = $record['email'];
 
@@ -23,23 +25,13 @@
         }
     }
 
-    // $id = $_POST['id'];
-    // $query = "DELETE FROM requests WHERE request_id='$id'";
-
-    // $statement = $db->prepare($query);
-
-    // if ($statement->execute()) {
-    //     header('Location: index.php');
-    //     exit();
-    // }
-
     include('header.php');
 ?>
-    <form action="post">
+    <form method="post">
         <label for="email">Email: </label>
-        <input type="text" name="email">
+        <input type="text" name="email" id="email">
         <label for="password">Password: </label>
-        <input type="password" name="password">
+        <input type="password" name="password" id="password">
         <input type="submit" value="login">
     </form>
 <?php include('footer.php'); ?>
