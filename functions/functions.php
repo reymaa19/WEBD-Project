@@ -90,7 +90,7 @@
 		$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 		$first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$password = $_POST['password'];
+		$password = md5($_POST['password']);
 		
 		$query = "UPDATE users SET email = :email, first_name = :first_name, 
 			last_name = :last_name, password = :password WHERE user_id = :user_id";
@@ -195,7 +195,7 @@
 	// Checks if a user is logged in and a session id is on.
 	function secure() {
 		if(!isset($_SESSION['id'])) {
-			set_message('You must first log in to access this page.');
+			set_message('You must first log in to access any other page.');
 			header('Location: index.php');
 			exit();
 		}

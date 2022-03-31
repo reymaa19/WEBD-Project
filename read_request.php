@@ -35,13 +35,7 @@
 	</header>
 	<div id="wrapper">
 		<div class="full_request">
-			<h2><?= $request['title'] ?><small>
-				<a 
-					href="update_request.php
-							?id=<?= $request['request_id'] ?>
-							&service_id=<?= $request['user_id'] ?>
-							&start_date=<?= $request['start_date'] ?>">edit</a>
-			</small></h2>
+			<h2 id="request_title"><?= $request['title'] ?></h2>
 			<h4>
 				Requested start date: <?= $request['start_date'] ?>
 			</h4>
@@ -53,4 +47,16 @@
 			</div>
 		</div>
 	</div>
+<script>
+	// If an admin is logged in, create edit link.
+	if ("<?php echo $_SESSION['admin']; ?>" == true) {
+		var editLink = document.createElement('a');
+		editLink.innerHTML = "Edit";
+		editLink.href = "update_request.php?id=<?= $request['request_id'] ?>
+							&service_id=<?= $request['user_id'] ?>
+							&start_date=<?= $request['start_date'] ?>";
+
+		document.getElementById("request_title").appendChild(editLink);
+	} 
+</script>
 <?php include('footer.php'); ?>

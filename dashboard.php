@@ -3,8 +3,6 @@
     include('connect.php');
     include('functions/functions.php');
 
-    secure();
-
     include('header.php');    
 ?>
 <div id="wrapper">
@@ -24,7 +22,8 @@
             </div> -->
 
             <div id="board_index">
-                <h2 id="requests_board"><a href="requests.php">Requests Board</a></h2>
+                <h2><a href="requests.php">Requests Board</a></h2>
+                <h2><a href="services.php">Services</a></h2>
             </div>
 		</main>
     </div>

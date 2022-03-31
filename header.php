@@ -13,7 +13,7 @@
     <title>WEBD Project</title>
 </head>
 <body>
-    <header>
+<header>
         <nav>
             <h1><a href="dashboard.php">Reynald Lawncare and Snow Removal</a></h1>
             <a href="create_request.php">Create Request</a>

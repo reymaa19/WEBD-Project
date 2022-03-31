@@ -3,8 +3,6 @@
     include('connect.php');
     include('functions/functions.php');
 
-    secure();
-
     include('header.php');    
 ?>
 <div class="wrapper">
