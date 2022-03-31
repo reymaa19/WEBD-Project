@@ -79,7 +79,8 @@
 
 		if ($statement->execute()) 
 		{
-			header('Location: dashboard.php');
+			header('Location: index.php');
+			set_message('Registration successful.');
 			exit();
 		}
 	}

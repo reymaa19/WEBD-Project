@@ -14,6 +14,9 @@
             <label for="password">Password: </label>
             <input type="password" name="password">
 
+            <label for="password2">Re-type Password: </label>
+            <input type="password" name="password2">
+
             <label for="first_name">First Name: </label>
             <input type="text" name="first_name">
 

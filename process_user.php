@@ -9,9 +9,14 @@
 	include('connect.php');
 	include('functions/functions.php');
 
-	if (check_inputs() == "") {
+	if (empty(check_inputs())) {
 		if ($_POST['command'] == 'Create') 
 		{
+			if ($_POST['password'] != $_POST['password2']) {
+				header('location: create_user.php');
+				set_message('Passwords do not match. Try again.');
+				exit();
+			}
 			create_user($db);
 		}
 		elseif ($_POST['command'] == 'Update')
@@ -25,17 +30,10 @@
 		delete_user($db);
 	}
 
-	set_message(check_inputs());
-
-	secure();
+	set_message('An error occured while processing your user.<br>' . check_inputs());
+	header('location: create_user.php');
+	exit();
 
     include('header.php');
 ?>
-	<div id="wrapper">
-		<main>
-			<h2>An error occured while processing your user.</h2>
-			<br>
-			<a href="dashboard.php"><strong>Return Home</strong></a>
-		</main>
-	</div>
 <?php include('footer.php'); ?>

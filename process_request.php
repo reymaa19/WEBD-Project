@@ -22,17 +22,12 @@
 		}
 	} 
 	
-	set_message(check_inputs() . '<br>Put in a date time greater than right now.');
-
+	set_message('An error occured while processing your request.<br>'.check_inputs()
+		.'<br>Put in a date time greater than right now.');
+	header('location: create_request.php');
+	exit();
 	secure();
 
     include('header.php');
 ?>
-	<div id="wrapper">
-		<main>
-			<h2>An error occured while processing your request.</h2>
-			<br>
-			<a href="dashboard.php"><strong>Return Home</strong></a>
-		</main>
-	</div>
 <?php include('footer.php'); ?>

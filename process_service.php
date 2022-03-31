@@ -19,17 +19,12 @@
 		delete_service($db);
 	}
 
-	set_message(check_inputs());
+	set_message('An error occured while processing your service. <br>'.check_inputs());
+	header('location: create_service.php');
+	exit();
 
 	secure();
 
     include('header.php');
 ?>
-	<div id="wrapper">
-		<main>
-			<h2>An error occured while processing your service.</h2>
-			<br>
-			<a href="dashboard.php"><strong>Return Home</strong></a>
-		</main>
-	</div>
 <?php include('footer.php'); ?>
