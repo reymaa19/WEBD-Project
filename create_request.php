@@ -21,7 +21,7 @@
             <input type="text" name="title" id="title" placeholder="Mow my Lawn"/>
 
             <!-- Populated with created services -->
-            <select id="service_type" name="service_id">
+            <select name="service_id">
             <option hidden disabled selected> -- Select a Service -- </option>
             <?php foreach ($rows as $row): ?>
                 <option value="<?= $row['service_id'] ?>"><?= $row['title'] ?></option>

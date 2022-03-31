@@ -48,7 +48,7 @@
                 <!-- Requests -->
                 <?php foreach ($result as $row): ?>
                     <div class="request">
-                        <h3><a href="show.php?id=<?= $row['request_id'] ?>"><?= $row['title'] ?></a></h3>
+                        <h3><a href="read_request.php?id=<?= $row['request_id'] ?>"><?= $row['title'] ?></a></h3>
                         <?php if (truncateContent($row['description'])): ?>
 	    					<a href="show.php?id=<?= $row['request_id'] ?>">Read Full Request</a>
 	    				<?php endif ?>

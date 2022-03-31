@@ -18,10 +18,10 @@
                 trims, soil quality and weeds control, and more.
             </p>
 
-            <div id="images">
+            <!-- <div id="images">
                 <img class="img" src="images/snow_house.jpg" alt="snow house">
                 <img class="img" src="images/kept_lawn.jpg" alt="kept lawn">
-            </div>
+            </div> -->
 
             <div id="board_index">
                 <h2 id="requests_board"><a href="requests.php">Requests Board</a></h2>
