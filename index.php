@@ -17,11 +17,16 @@
 
         if (!empty($record))
         {
+            // Successful
             $_SESSION['id'] = $record['user_id'];
             $_SESSION['admin'] = $record['admin'];
-
+            
             header('Location: dashboard.php');
+            set_message('Login Successful');
             exit();
+        } else {
+            // Unsuccessful
+            set_message('Login Unsuccessful');
         }
     }
 
