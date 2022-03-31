@@ -179,6 +179,7 @@
 		}
 	}
 
+	// Checks the if the input date is greater than right now.
 	function check_date($date) {
 		$current_date = date('Y-m-d H:i:s');
 		if ($date > $current_date) {
