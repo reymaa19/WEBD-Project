@@ -12,7 +12,7 @@
     $rows = $statement->fetchAll();
 ?>
 <div id="wrapper">
-    <h2>Users</h2>
+    <h2>Services</h2>
     <table border="1">
         <tr id="users_th">
             <th>Title</th>

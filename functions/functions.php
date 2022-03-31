@@ -120,7 +120,6 @@
 		}
 	}
 
-
 	// Creates a service.
 	function create_service($db) {
 		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -180,6 +179,13 @@
 		}
 	}
 
+	function check_date($date) {
+		$current_date = date('Y-m-d H:i:s');
+		if ($date > $current_date) {
+			return true;
+		}
+		return false;
+	}
 
 	// Checks if all inputs for  are filled in and selected.
 	function check_inputs() {

@@ -74,7 +74,6 @@ header {
     display: flex;
     border-bottom: 2px solid black;
     margin-bottom: 1em;
-    position:fixed;
     width: 100%;
     background-color: #F0F8FF;
     margin-top: -8px;
