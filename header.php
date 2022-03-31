@@ -17,24 +17,20 @@
         <nav>
             <h1><a href="dashboard.php">Reynald Lawncare and Snow Removal</a></h1>
             <a href="create_request.php">Create Request</a>
+            <a href="services.php">Services</a>
             <a href="create_user.php">Register</a>
             <a href="logout.php">Logout</a>
         </nav>
     </header>
 
     <script>
-        // If an admin is logged in, create user links.
+        // If an admin is logged in, create user link.
         if ("<?php echo $_SESSION['admin']; ?>" == true) {
             var userLink = document.createElement('a');
             userLink.innerHTML = "Users";
             userLink.href = "users.php";
 
-            var serviceLink = document.createElement('a');
-            serviceLink.innerHTML = "Services";
-            serviceLink.href = "services.php";
-
             document.getElementsByTagName("nav")[0].appendChild(userLink);
-            document.getElementsByTagName("nav")[0].appendChild(serviceLink);
         }
     </script>
 

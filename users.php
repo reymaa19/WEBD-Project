@@ -33,7 +33,6 @@
             <td><a href="update_user.php?id=<?= $row['user_id'] ?>">Edit</a></td>
         </tr>
         <?php endforeach; ?>
-
     </table>
 </div>
 <?php include('footer.php'); ?>
