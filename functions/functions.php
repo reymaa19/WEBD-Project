@@ -56,7 +56,7 @@
 		$statement = $db->prepare($query);
 
 		if ($statement->execute()) {
-			header('Location: dashboard.php');
+			header('Location: requests.php');
 			exit();
 		}
 	}
