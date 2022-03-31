@@ -37,10 +37,10 @@
                 <form id="sortform" action="" method="post">
                     <select id="sort" name="sort" onchange="this.form.submit()">
                         <option hidden disabled selected> Sort </option>
-                        <option value="title ASC">Title</option>
+                        <option value="title ASC">Title Ascending</option>
+                        <option value="title DESC">Title Descending</option>
                         <option value="start_date ASC">Earliest Start Date</option>
                         <option value="start_date DESC">Latest Start Date</option>
-                        <option value="service_type DESC">Service Type</option>
                     </select>
                 </form>
                 <small>Currently sorted by: <?= $current_sort ?></small>
