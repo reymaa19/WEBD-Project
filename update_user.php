@@ -15,6 +15,8 @@
 
     $statement->bindValue('id', $id, PDO::PARAM_INT);
     $statement->execute();
+
+    echo("<h1>".$id."</h1>");
     
     $row = $statement->fetch();
 
