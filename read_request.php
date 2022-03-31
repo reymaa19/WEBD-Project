@@ -40,6 +40,7 @@
 				Requested start date: <?= $request['start_date'] ?>
 			</h4>
 			<h3>Service chosen: <?= $service['title'] ?></h3>
+			<h2>Estimate: $<?= $service['estimate'] ?></h2>
 			<div>
 				<?= $request['description'] ?>
 				<br>

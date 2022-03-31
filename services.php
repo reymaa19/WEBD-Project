@@ -25,7 +25,7 @@
         <tr id=<?= $row['service_id']?>>
             <td><?= $row['title'] ?></td>
             <td><?= $row['description'] ?></td>
-            <td><?= $row['estimate'] ?></td>
+            <td>$<?= $row['estimate'] ?></td>
             <td><?= $row['service_type'] ?></td>
             <script>
                 // If an admin is logged in, enable service create link.
