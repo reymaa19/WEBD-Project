@@ -27,6 +27,7 @@
 
 	if ($_POST['command'] == 'Delete')
 	{
+		include('authenticate.php');
 		delete_user($db);
 	}
 
