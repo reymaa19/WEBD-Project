@@ -1,10 +1,4 @@
 <?php 
-/**
- *		process_post
- *		Name: Reynald Maala
- *		Date: March 30, 2022
- *		Description: For process validating of request creations. */ 
-
 	include('config.php');
 	include('connect.php');
 	include('functions/functions.php');

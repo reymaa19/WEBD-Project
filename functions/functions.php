@@ -27,20 +27,21 @@
 	// Updates the request.
 	function update_request($db) {
 		$request_id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+		$service_id = filter_input(INPUT_POST, 'service_id', FILTER_SANITIZE_NUMBER_INT);
 		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$service_type = filter_input(INPUT_POST, 'service_type', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$start_date = $_POST['start_date'];
 		
-		$query = "UPDATE requests SET title = :title, description = :description, 
-			service_type = :service_type, start_date = :start_date WHERE request_id = :request_id";
+		$query = "UPDATE requests SET service_id = :service_id,
+			title = :title, description = :description, start_date = :start_date
+			WHERE request_id = :request_id";
 		$statement = $db->prepare($query);
+		$statement->bindValue(':request_id', $request_id, PDO::PARAM_INT);
+		$statement->bindValue(':service_id', $service_id);
 		$statement->bindValue(':title', $title);
-		$statement->bindValue(':service_type', $service_type);
 		$statement->bindValue(':description', $description);
 		$statement->bindValue(':start_date', $start_date);
-		$statement->bindValue(':request_id', $request_id, PDO::PARAM_INT);
-		
+
 		$statement->execute();
 		
 		header("Location: requests.php");

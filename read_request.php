@@ -34,7 +34,13 @@
 	</header>
 	<div id="wrapper">
 		<div class="full_request">
-			<h2><?= $title ?> <small><a href="update_request.php?id=<?= $request_id ?>&service_id=<?= $service_id ?>">edit</a></small></h2>
+			<h2><?= $title ?><small>
+				<a 
+					href="update_request.php
+							?id=<?= $request_id ?>
+							&service_id=<?= $service_id ?>
+							&start_date=<?= $start_date ?>">edit</a>
+			</small></h2>
 			<h4>
 				Requested start date: <?= $start_date ?>
 			</h4>
