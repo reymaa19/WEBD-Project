@@ -53,8 +53,8 @@
 		var editLink = document.createElement('a');
 		editLink.innerHTML = "Edit";
 		editLink.href = "update_request.php?id=<?= $request['request_id'] ?>
-							&service_id=<?= $request['user_id'] ?>
-							&start_date=<?= $request['start_date'] ?>";
+						&service_id=<?= $request['service_id'] ?>
+						&start_date=<?= $request['start_date'] ?>";
 
 		document.getElementById("request_title").appendChild(editLink);
 	} 

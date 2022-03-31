@@ -19,7 +19,7 @@
 
 		if ($statement->execute()) 
 		{
-			header('Location: dashboard.php');
+			header('Location: requests.php');
 			exit();
 		}
 	}

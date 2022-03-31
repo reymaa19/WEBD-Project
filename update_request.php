@@ -20,7 +20,7 @@
     $statement->bindValue('id', $request_id, PDO::PARAM_INT);
     $statement->execute();
     
-    $result = $statement->fetch();
+    $request = $statement->fetch();
 
 	// Fetch services to populate selection.
 	$query = "SELECT * FROM services ORDER BY title DESC";
@@ -28,7 +28,7 @@
     $statement = $db->prepare($query);
     $statement->execute(); 
 
-    $rows = $statement->fetchAll();
+    $services = $statement->fetchAll();
 
     secure();
 
@@ -39,15 +39,15 @@
 		  <form action="process_request.php" method="post">
 		    <fieldset>
 				<label for="title">Title</label>
-				<input type="text" name="title" placeholder="Mow my Lawn" value="<?= $result['title'] ?>"/>
+				<input type="text" name="title" placeholder="Mow my Lawn" value="<?= $request['title'] ?>"/>
 
 				<select name="service_id">
 				<option hidden disabled> -- Select a Service -- </option>
-				<?php foreach ($rows as $row): ?>
-					<?php if($service_id == $row['service_id']): ?>
-						<option value="<?= $row['service_id'] ?>" selected><?= $row['title'] ?></option>
+				<?php foreach ($services as $service): ?>
+					<?php if($service_id == $service['service_id']): ?>
+						<option value="<?= $service['service_id'] ?>" selected><?= $service['title'] ?></option>
 					<?php else: ?>
-						<option value="<?= $row['service_id'] ?>"><?= $row['title'] ?></option>
+						<option value="<?= $service['service_id'] ?>"><?= $service['title'] ?></option>
 					<?php endif; ?>
 				<?php endforeach ?>
 				</select>
@@ -56,7 +56,7 @@
 				<input type="datetime-local" name="start_date" value="<?= $start_date ?>">
 
 				<label for="description">Description</label>
-				<textarea name="description" rows="3"><?= $result['description'] ?></textarea>
+				<textarea name="description" rows="3"><?= $request['description'] ?></textarea>
 		      	<div">
 					<input type="hidden" name="id" value="<?= $request_id ?>" />
 					<input type="submit" name="command" value="Update" />
