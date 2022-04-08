@@ -52,7 +52,7 @@
                 <form method="post">
                     <label for="search">Search</label>
                     <input type="text" name="search">
-                    <input type="submit" name="submit">
+                    <input type="submit" value="Search">
                 </form>
 
                 <!-- Sort -->

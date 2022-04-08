@@ -3,6 +3,19 @@
 	include('connect.php');
 	include('functions/functions.php');
 
+	function user_comment($user_id, $db) {
+		$query = "SELECT * FROM users WHERE user_id = '".$user_id."' LIMIT 1";
+		$statement = $db->prepare($query);
+		$statement->execute();
+	
+		$comment_user = $statement->fetch();
+		return $comment_user['first_name'] . " " . $comment_user['last_name'];
+	}
+
+	if(isset($_POST['content'])) {
+		create_comment($db);
+	}
+
 	// Fetch selected request.
     $query = "SELECT * FROM requests WHERE request_id = :id LIMIT 1";
     $statement = $db->prepare($query);
@@ -27,6 +40,13 @@
 	$statement->execute();
 
 	$user = $statement->fetch();
+
+	// Fetch comments based on request_id.
+	$query = "SELECT * FROM comments WHERE request_id = '".$request['request_id']."' ORDER BY datetime DESC";
+	$statement = $db->prepare($query);
+	$statement->execute();
+
+	$comments = $statement->fetchAll();
 	
 	secure();
 
@@ -50,6 +70,27 @@
 			<?php endif; ?>	
 		</div>
 	</div>
+
+	<div class="comment_section">
+		<h3>Comments</h3>
+		<form method="post">
+			<label for="comment">Add Comment</label>
+			<input type="text" name="content">
+			<input type="hidden" name="request_id" value="<?= $request['request_id'] ?>" />
+			<input type="submit" value="Comment">
+		</form>
+
+		<div class="comments">
+			<?php foreach ($comments as $comment): ?>
+				<div class="comment">
+					<p> <?= $comment['content'] ?></p>
+					<small>- <?= user_comment($comment['user_id'], $db) ?></small>
+				</div>
+			<?php endforeach ?>
+		</div>
+	</div>
+
+
 </div>
 <script>
 	// If an admin is logged in.
