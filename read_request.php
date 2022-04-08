@@ -32,25 +32,29 @@
 
     include('header.php');
 ?>
-	</header>
-	<div id="wrapper">
-		<div class="full_request">
-			<h2 id="request_title"><?= $request['title'] ?></h2>
-			<h4>
-				Requested start date: <?= $request['start_date'] ?>
-			</h4>
+<div id="wrapper">
+	<div class="full_request">
+		<h2 id="request_title"><?= $request['title'] ?></h2>
+		<h4>
+			Requested start date: <?= $request['start_date'] ?>
+		</h4>
+		<?php if(isset($service['title'])) : ?>
 			<h3>Service chosen: <?= $service['title'] ?></h3>
 			<h2>Estimate: $<?= $service['estimate'] ?></h2>
-			<div>
-				<?= $request['description'] ?>
-				<br>
-				<small>- <?= $user['first_name'] . ' ' . $user['last_name'] ?></small>
-			</div>
+		<?php endif; ?>	
+		<div>
+			<?= $request['description'] ?>
+			<br>
+			<?php if(isset($user['first_name'])) : ?>
+    			<small>- <?= $user['first_name'] . ' ' . $user['last_name'] ?></small>
+			<?php endif; ?>	
 		</div>
 	</div>
+</div>
 <script>
-	// If an admin is logged in, create edit link.
-	if ("<?php echo $_SESSION['admin']; ?>" == true) {
+	// If an admin is logged in.
+	if ("<?php echo $_SESSION['admin']; ?>" == true || 
+	"<?php echo $_SESSION['id']; ?>" == "<?php echo$user['user_id']; ?>") {
 		var editLink = document.createElement('a');
 		editLink.innerHTML = "Edit";
 		editLink.href = "update_request.php?id=<?= $request['request_id'] ?>
