@@ -3,6 +3,7 @@
 	include('connect.php');
 	include('functions/functions.php');
 
+
     $query = "SELECT * FROM requests ORDER BY start_date DESC";
 
     if(isset($_POST['sort'])) {
@@ -10,11 +11,24 @@
     }
 
     $current_sort = str_replace('_', ' ', substr($query, 32));
+
+    $result_found = false;
+
+    if(isset($_POST['search'])) {
+        $query = "SELECT * 
+            FROM requests 
+            WHERE INSTR(LOWER(title), '" . strtolower($_POST['search']) . "')  
+            OR INSTR(LOWER(description), '" . strtolower($_POST['search']) . "')";
+    }
     
     $statement = $db->prepare($query);
     $statement->execute(); 
 
     $result = $statement->fetchAll();
+
+    if(empty($result)) {
+        set_message("No results found.");
+    }
 
     function truncateContent($description) {
         if(strlen($description) <= 200) {
@@ -32,7 +46,15 @@
     <div id="wrapper">
 		<main>
             <div id="board">
-                <h2>Requests Board</h2>
+                <h2><a href="Requests.php">Requests Board</a></h2>
+
+                <!-- Search -->
+                <form method="post">
+                    <label for="search">Search</label>
+                    <input type="text" name="search">
+                    <input type="submit" name="submit">
+                </form>
+
                 <!-- Sort -->
                 <form id="sortform" action="" method="post">
                     <select id="sort" name="sort" onchange="this.form.submit()">
@@ -43,6 +65,7 @@
                         <option value="start_date DESC">Latest Start Date</option>
                     </select>
                 </form>
+
                 <small>Currently sorted by: <?= $current_sort ?></small>
 
                 <!-- Requests -->
