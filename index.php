@@ -7,15 +7,14 @@
         $query = 'SELECT * 
                   FROM users
                   WHERE email = "'.$_POST['email'].'"
-                  AND password = "'.md5($_POST['password']).'"
                   LIMIT 1';
-        
+
         $statement = $db->prepare($query);
         $statement->execute();
 
         $record = $statement->fetch();
 
-        if (!empty($record))
+        if (!empty($record) && password_verify($_POST['password'], $record['password']))
         {
             // Successful
             $_SESSION['id'] = $record['user_id'];

@@ -95,12 +95,12 @@
 <script>
 	// If an admin is logged in.
 	if ("<?php echo $_SESSION['admin']; ?>" == true || 
-	"<?php echo $_SESSION['id']; ?>" == "<?php echo$user['user_id']; ?>") {
+	"<?php echo $_SESSION['id']; ?>" == "<?php echo $user['user_id']; ?>") {
 		var editLink = document.createElement('a');
-		editLink.innerHTML = "Edit";
-		editLink.href = "update_request.php?id=<?= $request['request_id'] ?>
-						&service_id=<?= $request['service_id'] ?>
-						&start_date=<?= $request['start_date'] ?>";
+			editLink.innerHTML = "Edit";
+			editLink.href = "update_request.php?id=<?= $request['request_id'] ?>
+							 &service_id=<?= $request['service_id'] ?>
+							 &start_date=<?= $request['start_date'] ?>";
 
 		document.getElementById("request_title").appendChild(editLink);
 	} 

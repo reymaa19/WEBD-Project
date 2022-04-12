@@ -1,4 +1,7 @@
 <?php
+
+	use \Gumlet\ImageResize;
+
     // Creates a request.
 	function create_request($db) {
 		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -66,7 +69,7 @@
 		$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 		$first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$password = md5($_POST['password']);
+		$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 		$query = "INSERT INTO users (email, first_name, last_name, password) 
 					VALUES (:email, :first_name, :last_name, :password)";
@@ -91,7 +94,7 @@
 		$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 		$first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$password = md5($_POST['password']);
+		$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		
 		$query = "UPDATE users SET email = :email, first_name = :first_name, 
 			last_name = :last_name, password = :password WHERE user_id = :user_id";
@@ -180,30 +183,6 @@
 		}
 	}
 
-	// Creates a Comment.
-	function create_comment($db) {
-		$date = date('Y-m-d H:i:s');
-		$user_id = $_SESSION['id'];
-		$request_id = filter_input(INPUT_POST, 'request_id', FILTER_SANITIZE_NUMBER_INT);
-		$content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$datetime = $date;
-
-		$query = "INSERT INTO comments (user_id, request_id, content, datetime) 
-					VALUES (:user_id, :request_id, :content, :datetime)";
-
-		$statement = $db->prepare($query);
-		$statement->bindValue(':user_id', $user_id);
-		$statement->bindValue(':request_id', $request_id);
-		$statement->bindValue(':content', $content);
-		$statement->bindValue(':datetime', $datetime);
-
-		if ($statement->execute()) 
-		{
-			header('Location: read_request.php?id=' . $request_id);
-			exit();
-		}
-	}
-
 	// Checks the if the input date is greater than right now.
 	function check_date($date) {
 		$current_date = date('Y-m-d H:i:s');
@@ -244,6 +223,48 @@
 			echo '<p>' . $_SESSION['message'] . '</p>' . 
 			'<hr>';
 			unset($_SESSION['message']);
+		}
+	}
+
+	// Creates the file upload path.
+	function upload_path($original_filename, $upload_subfolder_name = 'uploads') {
+		$current_folder = dirname(__FILE__);
+		
+		$path_segments = [$current_folder, $upload_subfolder_name, basename($original_filename)];
+
+		return join(DIRECTORY_SEPARATOR, $path_segments);
+	}
+		
+	// Checks if the file is of appropriate type. 
+	function file_check($temporary_path) {
+		$allowed_mime_types = ['image/gif', 'image/jpeg', 'image/png'];
+
+		foreach ($allowed_mime_types as $type) {
+			if (str_contains($temporary_path, $type)) {
+				return "You have uploaded a file of type {$type}.";
+			}
+		}
+		return null;
+	}
+
+	// Uploads images.
+	function upload_image() {
+		$image_upload_detected = isset($_FILES['image']) && ($_FILES['image']['type'] !== 'application/pdf');
+
+		if ($image_upload_detected && $_FILES['image']['error'] === 0) {
+			$temporary_image_path  = $_FILES['image']['tmp_name'];
+			$image_filename        = $_FILES['image']['name'];
+	
+			if (file_check($_FILES['image']['type']) != null) {
+				$original_size = new ImageResize($temporary_image_path);
+				$original_size->save('uploads\\' . $image_filename . '-ORIGINAL.jpg');
+		
+				$medium_size = $original_size->resizeToWidth(400);
+				$medium_size->save('uploads\\' . $image_filename . '-MEDIUM.jpg');
+		
+				$thumbnail = $original_size->resizeToWidth(50);
+				$thumbnail->save('uploads\\' . $image_filename . '-THUMBNAIL.jpg');
+			}        
 		}
 	}
 ?>
