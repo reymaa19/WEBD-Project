@@ -41,6 +41,13 @@
 
 	$user = $statement->fetch();
 
+	// Fetch image based on request_id.
+	$query = "SELECT * FROM images WHERE request_id = '".$request['request_id']."' LIMIT 1";
+	$statement = $db->prepare($query);
+	$statement->execute();
+
+	$image = $statement->fetch();
+
 	// Fetch comments based on request_id.
 	$query = "SELECT * FROM comments WHERE request_id = '".$request['request_id']."' ORDER BY datetime DESC";
 	$statement = $db->prepare($query);
@@ -55,6 +62,9 @@
 <div id="wrapper">
 	<div class="full_request">
 		<h2 id="request_title"><?= $request['title'] ?></h2>
+		<?php if(isset($image['medium_path'])) : ?>
+			<img src="<?= $image['medium_path'] ?>" alt="<?= $image['medium_path'] ?>">
+		<?php endif; ?>	
 		<h4>
 			Requested start date: <?= $request['start_date'] ?>
 		</h4>

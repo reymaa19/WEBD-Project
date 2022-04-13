@@ -2,12 +2,18 @@
 	include('config.php');
 	include('connect.php');
 	include('functions/functions.php');
+	include('functions/ImageResize.php');
+	include('functions/ImageResizeException.php');
 
 	if (check_date($_POST['start_date'])) {
 		if (check_inputs() == "") {
 			if ($_POST['command'] == 'Create') 
 			{
-				create_request($db);
+				if (isset($_FILES['image'])) {
+					create_request($db, $_FILES['image']);
+				} else {
+					create_request($db);	
+				}
 			}
 			elseif ($_POST['command'] == 'Update')
 			{

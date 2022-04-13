@@ -15,7 +15,7 @@
     include('header.php');    
 ?>
 <div id="wrapper">
-    <form action="process_request.php" method="post">
+    <form action="process_request.php" method="post" enctype='multipart/form-data'>
         <fieldset>
             <label for="title">Title</label>
             <input type="text" name="title" id="title" placeholder="Mow my Lawn"/>
@@ -33,6 +33,9 @@
 
             <label for="description">Description</label>
             <textarea name="description" id="description" rows="3"></textarea>
+
+            <label for='image'>Image Filename:</label>
+            <input type='file' name='image' id='image'>
 
             <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>" />
             <input type="submit" name="command" value="Create"></input>
