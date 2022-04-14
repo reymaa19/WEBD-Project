@@ -55,13 +55,13 @@
 
                 <!-- Search -->
                 <form method="post">
-                    <label for="search">Search</label>
-                    <input type="text" name="search">
+                    <label for="searchbar">Search</label>
+                    <input type="text" name="search" id="searchbar">
                     <input type="submit" value="Search">
                 </form>
 
                 <!-- Sort -->
-                <form id="sortform" action="" method="post">
+                <form id="sortform" method="post">
                     <select id="sort" name="sort" onchange="this.form.submit()">
                         <option hidden disabled selected> Sort </option>
                         <option value="title ASC">Title Ascending</option>

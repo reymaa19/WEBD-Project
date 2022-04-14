@@ -75,16 +75,16 @@
 	
 			if (file_check($image['type']) != null) {
 				$original_size= new ImageResize($temporary_image_path);
-				$original_size->save('uploads\\' . $image_filename . '-ORIGINAL.jpg');
-				$original_path = 'uploads\\' . $image_filename . '-ORIGINAL.jpg';
+				$original_size->save('uploads\\' . $image_filename . $request_id . '-ORIGINAL.jpg');
+				$original_path = 'uploads\\' . $image_filename . $request_id . '-ORIGINAL.jpg';
 		
 				$medium_size = $original_size->resizeToWidth(400);
-				$medium_size->save('uploads\\' . $image_filename . '-MEDIUM.jpg');
-				$medium_path = 'uploads\\' . $image_filename . '-MEDIUM.jpg';
+				$medium_size->save('uploads\\' . $image_filename . $request_id . '-MEDIUM.jpg');
+				$medium_path = 'uploads\\' . $image_filename . $request_id . '-MEDIUM.jpg';
 		
 				$thumbnail_size = $original_size->resizeToWidth(50);
-				$thumbnail_size->save('uploads\\' . $image_filename . '-THUMBNAIL.jpg');
-				$thumbnail_path = 'uploads\\' . $image_filename . '-THUMBNAIL.jpg';
+				$thumbnail_size->save('uploads\\' . $image_filename . $request_id . '-THUMBNAIL.jpg');
+				$thumbnail_path = 'uploads\\' . $image_filename . $request_id . '-THUMBNAIL.jpg';
 
 				create_image($original_path, $medium_path, $thumbnail_path, $request_id, $db);
 			} else {
@@ -108,5 +108,47 @@
 		$statement->bindValue(':datetime', $datetime);
 
 		$statement->execute();
+	}
+
+	// Deletes the image record from the database.
+	function delete_image($db, $image_id) {
+		delete_image_path($db, $image_id);
+
+		$query = "DELETE FROM images WHERE image_id = '$image_id'";
+		$statement = $db->prepare($query);
+
+		$statement->execute();
+	}
+
+	// Deletes the image from the server.
+	function delete_image_path($db, $image_id) {
+		$query = "SELECT * FROM images WHERE image_id = '$image_id'";
+		$statement = $db->prepare($query);
+		$statement->execute();
+
+		$image = $statement->fetch();
+		$original = $image['original_path'];
+		$medium = $image['medium_path'];
+		$thumbnail = $image['thumbnail_path'];
+
+		$files = [
+			$original, $medium, $thumbnail
+		];
+
+		foreach ($files as $file) {
+			if (file_exists($file)) {
+				unlink($file);
+			} else {
+				return;
+			}
+		}
+	}
+
+	function debug_to_console($data) {
+		$output = $data;
+		if (is_array($output))
+			$output = implode(',', $output);
+	
+		echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 	}
 ?>

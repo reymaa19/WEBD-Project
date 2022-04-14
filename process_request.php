@@ -75,49 +75,12 @@
 		}
 	}
 
-	// Deletes the image record from the database.
-	function delete_image($db, $image_id) {
-		delete_image_path($db, $image_id);
-
-		$query = "DELETE FROM images WHERE image_id = '$image_id'";
-		$statement = $db->prepare($query);
-
-		if ($statement->execute()) {
-			header('Location: requests.php');
-			exit();
-		}
-	}
-
-	// Deletes the image from the server.
-	function delete_image_path($db, $image_id) {
-		$query = "SELECT * FROM images WHERE image_id = '$image_id'";
-		$statement = $db->prepare($query);
-		$statement->execute();
-
-		$image = $statement->fetch();
-		$original = $image['original_path'];
-		$medium = $image['medium_path'];
-		$thumbnail = $image['thumbnail_path'];
-
-		$files = [
-			$original, $medium, $thumbnail
-		];
-
-		foreach ($files as $file) {
-			if (file_exists($file)) {
-				unlink($file);
-			} else {
-				return;
-			}
-		}
-	}
-
 
 
 	
 
 	if (check_date($_POST['start_date'])) {
-		if (check_inputs() == "") {
+		if (empty(check_inputs())) {
 			if ($_POST['command'] == 'Create') 
 			{
 				if (isset($_FILES['image'])) {
@@ -128,10 +91,12 @@
 			}
 			elseif ($_POST['command'] == 'Update')
 			{
-				if ($_POST['image'] == 'Delete') {
+				if ($_POST['image_checkbox'] == 'on') {
 					delete_image($db, $_POST['image_id']);
 				}
-
+				if (isset($_FILES['image'])) {
+					upload_image($_FILES['image'], $_POST['id'], $db);
+				}
 				update_request($db);
 			}
 		}
@@ -141,13 +106,18 @@
 			delete_image($db, $_POST['image_id']);
 			delete_request($db);
 		}
-	} 
+	}
 
 	set_message('An error occured while processing your request.<br>'.check_inputs()
 		.'<br>Put in a date time greater than right now.');
-	header('location: create_request.php');
+	if ($_POST['command'] == 'Update') {
+		header("Refresh:0");
+	} else {
+		header('location: create_request.php');
+	}
 	exit();
 	secure();
 
     include('header.php');
+	include('footer.php');
 ?>

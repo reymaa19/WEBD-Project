@@ -43,7 +43,7 @@
 ?>
 	<div id="wrapper">
 		<main>
-		  <form action="process_request.php" method="post">
+		  <form action="process_request.php" method="post" enctype="multipart/form-data">
 		    <fieldset>
 				<label for="title">Title</label>
 				<input type="text" name="title" placeholder="Mow my Lawn" value="<?= $request['title'] ?>"/>
@@ -68,8 +68,11 @@
 				<?php if(isset($image['medium_path'])): ?>
 					<input type="hidden" name="image_id" value="<?= $image['image_id'] ?>" />
 					<img src="<?= $image['medium_path']?>" alt="<?= $image['medium_path']?>">
-					<label for="image">Delete Image</label>
-					<input type="checkbox" name="image" value="Delete" />
+					<label for="image_checkbox">Delete Image</label>
+					<input type="checkbox" name="image_checkbox" id="image_checkbox"/>
+				<?php else: ?>
+					<label for='image'>Image Filename:</label>
+					<input type='file' name='image' id='image'>
 				<?php endif; ?>
 
 		      	<div>
