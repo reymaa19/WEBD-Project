@@ -19,18 +19,25 @@
             <h1><a href="dashboard.php">Reynald Lawncare and Snow Removal</a></h1>
             <a href="create_request.php">Create Request</a>
             <a href="create_user.php">Register</a>
-            <a href="logout.php">Logout</a>
         </nav>
     </header>
 
     <script>
-        // If an admin is logged in, create user link.
-        if ("<?php echo $_SESSION['admin']; ?>" == true) {
+        if (<?= isset($_SESSION['id']) ?>) {
+            if (<?= $_SESSION['admin'] ?>) {
             var userLink = document.createElement('a');
             userLink.innerHTML = "Users";
             userLink.href = "users.php";
 
             document.getElementsByTagName("nav")[0].appendChild(userLink);
+            }
+            if (typeof <?= $_SESSION['id']; ?> != 'undefined') {
+                var userLink = document.createElement('a');
+                userLink.innerHTML = "Logout";
+                userLink.href = "logout.php";
+
+                document.getElementsByTagName("nav")[0].appendChild(userLink);
+            }
         }
     </script>
 

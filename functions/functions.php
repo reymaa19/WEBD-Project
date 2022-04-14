@@ -75,16 +75,16 @@
 	
 			if (file_check($image['type']) != null) {
 				$original_size= new ImageResize($temporary_image_path);
-				$original_size->save('uploads\\' . $image_filename . $request_id . '-ORIGINAL.jpg');
-				$original_path = 'uploads\\' . $image_filename . $request_id . '-ORIGINAL.jpg';
+				$original_size->save('uploads/' . $image_filename . $request_id . '-ORIGINAL.jpg');
+				$original_path = 'uploads/' . $image_filename . $request_id . '-ORIGINAL.jpg';
 		
 				$medium_size = $original_size->resizeToWidth(400);
-				$medium_size->save('uploads\\' . $image_filename . $request_id . '-MEDIUM.jpg');
-				$medium_path = 'uploads\\' . $image_filename . $request_id . '-MEDIUM.jpg';
+				$medium_size->save('uploads/' . $image_filename . $request_id . '-MEDIUM.jpg');
+				$medium_path = 'uploads/' . $image_filename . $request_id . '-MEDIUM.jpg';
 		
 				$thumbnail_size = $original_size->resizeToWidth(50);
-				$thumbnail_size->save('uploads\\' . $image_filename . $request_id . '-THUMBNAIL.jpg');
-				$thumbnail_path = 'uploads\\' . $image_filename . $request_id . '-THUMBNAIL.jpg';
+				$thumbnail_size->save('uploads/' . $image_filename . $request_id . '-THUMBNAIL.jpg');
+				$thumbnail_path = 'uploads/' . $image_filename . $request_id . '-THUMBNAIL.jpg';
 
 				create_image($original_path, $medium_path, $thumbnail_path, $request_id, $db);
 			} else {
@@ -144,6 +144,7 @@
 		}
 	}
 
+	// TEMP!!!!!!!!!
 	function debug_to_console($data) {
 		$output = $data;
 		if (is_array($output))

@@ -27,10 +27,18 @@
 		}
 	}
 
+	// Deletes the comment.
+	function delete_comment($db) {
+		$query = "DELETE FROM comments WHERE comment_id=" . $_GET['comment_id'];
+		$statement = $db->prepare($query);
 
+		if ($statement->execute()) {
+			header('Location: read_request.php?id=' . $_GET['id']);
+			exit();
+		}
+	}	
 
-	
-
+	// Fetches the user comments.
 	function user_comment($user_id, $db) {
 		$query = "SELECT * FROM users WHERE user_id = '".$user_id."' LIMIT 1";
 		$statement = $db->prepare($query);
@@ -38,6 +46,14 @@
 	
 		$comment_user = $statement->fetch();
 		return $comment_user['first_name'] . " " . $comment_user['last_name'];
+	}
+
+
+
+
+
+	if (isset($_GET['comment_id'])) {
+		delete_comment($db);
 	}
 
 	if(isset($_POST['content'])) {
@@ -87,6 +103,10 @@
 
     include('header.php');
 ?>
+
+
+
+
 <div id="wrapper">
 	<div class="full_request">
 		<h2 id="request_title"><?= $request['title'] ?></h2>
@@ -121,7 +141,10 @@
 		<div class="comments">
 			<?php foreach ($comments as $comment): ?>
 				<div class="comment">
-					<p> <?= $comment['content'] ?></p>
+					<p> <?= $comment['content'] ?> 
+						<a href="read_request.php?id=<?= $request['request_id'] ?>
+							&comment_id=<?= $comment['comment_id']?>">Delete</a> 
+					</p>
 					<small>- <?= user_comment($comment['user_id'], $db) ?></small>
 				</div>
 			<?php endforeach ?>

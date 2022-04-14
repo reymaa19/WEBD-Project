@@ -64,8 +64,8 @@
 
 	// Deletes the request.
 	function delete_request($db) {
-		$id = $_POST['id'];
-		$query = "DELETE FROM requests WHERE request_id='$id'";
+		delete_comments($db);
+		$query = "DELETE FROM requests WHERE request_id=" . $_POST['id'];
 
 		$statement = $db->prepare($query);
 
@@ -73,6 +73,13 @@
 			header('Location: requests.php');
 			exit();
 		}
+	}
+
+	// Delete all comments from request.
+	function delete_comments($db) {
+		$query = "DELETE FROM comments WHERE request_id=" . $_POST['id'];
+		$statement = $db->prepare($query);
+		$statement->execute();
 	}
 
 
