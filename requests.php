@@ -3,7 +3,6 @@
 	include('connect.php');
 	include('functions/functions.php');
 
-
     $query = "SELECT * FROM requests ORDER BY start_date DESC";
 
     if(isset($_POST['sort'])) {
@@ -29,6 +28,12 @@
     if(empty($result)) {
         set_message("No results found.");
     }
+
+    $query = "SELECT * FROM images";
+    $statement = $db->prepare($query);
+    $statement->execute(); 
+
+    $images = $statement->fetchAll();
 
     function truncateContent($description) {
         if(strlen($description) <= 200) {
@@ -72,6 +77,11 @@
                 <?php foreach ($result as $row): ?>
                     <div class="request">
                         <h3><a href="read_request.php?id=<?= $row['request_id'] ?>"><?= $row['title'] ?></a></h3>
+                        <?php foreach ($images as $image): ?>
+                        <?php if ($image['request_id'] == $row['request_id']): ?>
+	    					<img src="<?= $image['thumbnail_path'] ?>" alt="<?= $image['thumbnail_path'] ?>">
+	    				<?php endif ?>
+                        <?php endforeach ?>
                         <?php if (truncateContent($row['description'])): ?>
 	    					<a href="show.php?id=<?= $row['request_id'] ?>">Read Full Request</a>
 	    				<?php endif ?>

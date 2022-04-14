@@ -30,6 +30,13 @@
 
     $services = $statement->fetchAll();
 
+	$query = "SELECT * FROM images WHERE request_id = '$request_id'";
+    
+    $statement = $db->prepare($query);
+    $statement->execute(); 
+
+	$image = $statement->fetch();
+
     secure();
 
     include('header.php');
@@ -57,7 +64,15 @@
 
 				<label for="description">Description</label>
 				<textarea name="description" rows="3"><?= $request['description'] ?></textarea>
-		      	<div">
+
+				<?php if(isset($image['medium_path'])): ?>
+					<input type="hidden" name="image_id" value="<?= $image['image_id'] ?>" />
+					<img src="<?= $image['medium_path']?>" alt="<?= $image['medium_path']?>">
+					<label for="image">Delete Image</label>
+					<input type="checkbox" name="image" value="Delete" />
+				<?php endif; ?>
+
+		      	<div>
 					<input type="hidden" name="id" value="<?= $request_id ?>" />
 					<input type="submit" name="command" value="Update" />
 					<input type="submit" name="command" value="Delete" onclick="return confirm('Are you sure you wish to delete this post?')" />

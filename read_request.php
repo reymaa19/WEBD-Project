@@ -3,6 +3,34 @@
 	include('connect.php');
 	include('functions/functions.php');
 
+	// Creates a Comment.
+	function create_comment($db) {
+		$date = date('Y-m-d H:i:s');
+		$user_id = $_SESSION['id'];
+		$request_id = filter_input(INPUT_POST, 'request_id', FILTER_SANITIZE_NUMBER_INT);
+		$content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$datetime = $date;
+
+		$query = "INSERT INTO comments (user_id, request_id, content, datetime) 
+					VALUES (:user_id, :request_id, :content, :datetime)";
+
+		$statement = $db->prepare($query);
+		$statement->bindValue(':user_id', $user_id);
+		$statement->bindValue(':request_id', $request_id);
+		$statement->bindValue(':content', $content);
+		$statement->bindValue(':datetime', $datetime);
+
+		if ($statement->execute()) 
+		{
+			header('Location: read_request.php?id=' . $request_id);
+			exit();
+		}
+	}
+
+
+
+	
+
 	function user_comment($user_id, $db) {
 		$query = "SELECT * FROM users WHERE user_id = '".$user_id."' LIMIT 1";
 		$statement = $db->prepare($query);
